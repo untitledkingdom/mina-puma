@@ -62,10 +62,10 @@ require 'mina/puma'
 
 task :setup => :environment do
   # Puma needs a place to store its pid file and socket file.
-  queue! %(mkdir -p "#{deploy_to}/#{shared_path}/tmp/sockets")
-  queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/tmp/sockets")
-  queue! %(mkdir -p "#{deploy_to}/#{shared_path}/tmp/pids")
-  queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/tmp/pids")
+  command %(mkdir -p "#{deploy_to}/#{shared_path}/tmp/sockets")
+  command %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/tmp/sockets")
+  command %(mkdir -p "#{deploy_to}/#{shared_path}/tmp/pids")
+  command %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/tmp/pids")
 
   ...
 
@@ -87,6 +87,15 @@ task :deploy do
   end
 end
 ```
+## Troubleshooting
+You can see the commands which are being executed on the server by including the following
+in your deploy file:
+
+```
+set :puma_debug, true
+```
+
+This will cause the commands on the server to be echoed locally.
 
 ## Contributing
 

@@ -87,6 +87,15 @@ task :deploy do
   end
 end
 ```
+## Troubleshooting
+You can see the commands which are being executed on the server by including the following
+in your deploy file:
+
+```
+set :puma_debug, true
+```
+
+This will cause the commands on the server to be echoed locally.
 
 ## Contributing
 

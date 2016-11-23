@@ -76,6 +76,9 @@ namespace :puma do
         echo 'Puma is not running!';
       fi
     }
+    if set?(:puma_debug)
+      comment "Running command:\n#{cmd}"
+    end
     command cmd
   end
 end

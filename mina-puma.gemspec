@@ -6,8 +6,8 @@ require 'mina/puma/version'
 Gem::Specification.new do |spec|
   spec.name          = 'mina-puma'
   spec.version       = Mina::Puma::VERSION
-  spec.authors       = ['Tobias Sandelius']
-  spec.email         = ['tobias@sandeli.us']
+  spec.authors       = ['Tobias Sandelius', 'Sergey Sova']
+  spec.email         = ['tobias@sandeli.us', 'i.am@lestad.net']
   spec.description   = %q{Puma tasks for Mina}
   spec.summary       = %q{Puma tasks for Mina}
   spec.homepage      = 'https://github.com/sandelius/mina-puma'

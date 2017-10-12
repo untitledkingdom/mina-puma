@@ -16,7 +16,7 @@ namespace :puma do
   set :puma_root_path, -> { fetch(:current_path) }
 
   desc 'Start puma'
-  task :start => :environment do
+  task start: :remote_environment do
     puma_port_option = "-p #{fetch(:puma_port)}" if set?(:puma_port)
 
     comment "Starting Puma..."
@@ -34,33 +34,33 @@ namespace :puma do
   end
 
   desc 'Stop puma'
-  task stop: :environment do
+  task stop: :remote_environment do
     comment "Stopping Puma..."
     pumactl_command 'stop'
     command %[rm -f '#{fetch(:pumactl_socket)}']
   end
 
   desc 'Restart puma'
-  task restart: :environment do
+  task restart: :remote_environment do
     comment "Restart Puma...."
     pumactl_command 'restart'
   end
 
   desc 'Restart puma (phased restart)'
-  task phased_restart: :environment do
+  task phased_restart: :remote_environment do
     comment "Restart Puma -- phased..."
     pumactl_command 'phased-restart'
   end
 
   desc 'Restart puma (hard restart)'
-  task hard_restart: :environment do
+  task hard_restart: :remote_environment do
     comment "Restart Puma -- hard..."
     invoke 'puma:stop'
     invoke 'puma:start'
   end
 
   desc 'Get status of puma'
-  task status: :environment do
+  task status: :remote_environment do
     comment "Puma status..."
     pumactl_command 'status'
   end

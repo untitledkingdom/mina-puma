@@ -10,6 +10,8 @@ namespace :puma do
   set :puma_socket,    -> { "#{fetch(:shared_path)}/tmp/sockets/puma.sock" }
   set :puma_state,     -> { "#{fetch(:shared_path)}/tmp/sockets/puma.state" }
   set :puma_pid,       -> { "#{fetch(:shared_path)}/tmp/pids/puma.pid" }
+  set :puma_stdout,    -> { "#{fetch(:shared_path)}/log/puma.log" }
+  set :puma_stderr,    -> { "#{fetch(:shared_path)}/log/puma.log" }
   set :puma_cmd,       -> { "#{fetch(:bundle_prefix)} puma" }
   set :pumactl_cmd,    -> { "#{fetch(:bundle_prefix)} pumactl" }
   set :pumactl_socket, -> { "#{fetch(:shared_path)}/tmp/sockets/pumactl.sock" }
@@ -27,7 +29,7 @@ namespace :puma do
         if [ -e "#{fetch(:puma_config)}" ]; then
           cd #{fetch(:puma_root_path)} && #{fetch(:puma_cmd)} -q -d -e #{fetch(:puma_env)} -C #{fetch(:puma_config)}
         else
-          cd #{fetch(:puma_root_path)} && #{fetch(:puma_cmd)} -q -d -e #{fetch(:puma_env)} -b "unix://#{fetch(:puma_socket)}" #{puma_port_option} -S #{fetch(:puma_state)} --pidfile #{fetch(:puma_pid)} --control 'unix://#{fetch(:pumactl_socket)}'
+          cd #{fetch(:puma_root_path)} && #{fetch(:puma_cmd)} -q -d -e #{fetch(:puma_env)} -b "unix://#{fetch(:puma_socket)}" #{puma_port_option} -S #{fetch(:puma_state)} --pidfile #{fetch(:puma_pid)} --control 'unix://#{fetch(:pumactl_socket)}' --redirect-stdout "#{fetch(:puma_stdout)}" --redirect-stderr "#{fetch(:puma_stderr)}"
         fi
       fi
     ]

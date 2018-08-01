@@ -30,6 +30,12 @@ Note: by just including this gem, does not mean your development server will be 
 
 ## Usage
 
+Run:
+```
+mina init
+```
+to generate `config/deploy.rb` file if you have not configured it yet.
+
 Add this to your `config/deploy.rb` file:
 
     require 'mina/puma'

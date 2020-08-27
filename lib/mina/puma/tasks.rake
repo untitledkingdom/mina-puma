@@ -66,6 +66,12 @@ namespace :puma do
     comment "Puma status..."
     pumactl_command 'status'
   end
+  
+  desc 'Get stats of puma'
+  task status: :remote_environment do
+    comment "Puma stats..."
+    pumactl_command 'stats'
+  end  
 
   def pumactl_command(command)
     cmd =  %{
